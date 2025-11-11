@@ -8,6 +8,7 @@ import { DataSection } from "@/components/sections/data-section";
 import { FooterSection } from "@/components/footer-section";
 import { CentralQuestionSection } from "@/components/sections/central-question-section";
 import { YouthPerspectiveSection } from "@/components/sections/youth-perspective-section";
+import { QuizSection } from "@/components/sections/quiz-section";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <DataSection />
         <CentralQuestionSection />
         <YouthPerspectiveSection />
+        <QuizSection />
         <FooterSection />
       </div>
     </main>

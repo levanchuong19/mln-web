@@ -23,13 +23,19 @@ export function Navbar() {
     { label: "Thách Thức", href: "#thachthuc" },
     { label: "Câu Hỏi", href: "#cauhoi" },
     { label: "Góc Nhìn", href: "#goicnhinh" },
+    { label: "Trắc Nghiệm", href: "#quiz" },
+    { label: "Chatbot", href: "/chatbot" },
   ];
 
   const handleNavClick = (href: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("/")) {
+      window.location.href = href;
+    } else {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
