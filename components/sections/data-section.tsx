@@ -5,6 +5,7 @@ import { GDPChart } from "../charts/gdp-chart"
 import { LaborChart } from "../charts/labor-chart"
 import { TradeChart } from "../charts/trade-chart"
 import { FDIChart } from "../charts/fdi-chart"
+import { BarChartIcon, CheckCircleIcon, WarningIcon } from "../icons"
 
 export function DataSection() {
   const containerVariants = {
@@ -69,14 +70,32 @@ export function DataSection() {
 
           {/* Summary Stats */}
           <motion.div
-            className="bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-light)] border border-[var(--color-border)] rounded-xl p-8 md:p-12"
+            className="bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-light)] border border-[var(--color-border)] rounded-xl p-8 md:p-12 backdrop-blur-sm"
             variants={itemVariants}
-            whileHover={{ borderColor: "var(--color-accent)" }}
+            whileHover={{ borderColor: "var(--color-accent)", scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 100 }}
           >
-            <h3 className="text-2xl font-bold text-[var(--color-text)] mb-8">📊 Thành Tựu & Hạn Chế</h3>
+            <motion.h3 
+              className="text-2xl font-bold text-[var(--color-text)] mb-8 flex items-center gap-3"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <BarChartIcon size={28} />
+              Thành Tựu & Hạn Chế
+            </motion.h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h4 className="text-lg font-semibold text-[var(--color-accent)] mb-4">✅ Thành Tựu</h4>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-lg font-semibold text-[var(--color-accent)] mb-4 flex items-center gap-2">
+                  <CheckCircleIcon size={20} />
+                  Thành Tựu
+                </h4>
                 <ul className="space-y-3 text-[var(--color-text-muted)]">
                   <li className="flex items-start">
                     <span className="text-[var(--color-accent)] mr-3 mt-1">•</span>
@@ -91,9 +110,17 @@ export function DataSection() {
                     <span>Chỉ số vốn nhân lực cao nhất trong nhóm nước thu nhập trung bình thấp</span>
                   </li>
                 </ul>
-              </div>
-              <div>
-                <h4 className="text-lg font-semibold text-[var(--color-warmth)] mb-4">⚠️ Hạn Chế</h4>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <h4 className="text-lg font-semibold text-[var(--color-warmth)] mb-4 flex items-center gap-2">
+                  <WarningIcon size={20} />
+                  Hạn Chế
+                </h4>
                 <ul className="space-y-3 text-[var(--color-text-muted)]">
                   <li className="flex items-start">
                     <span className="text-[var(--color-warmth)] mr-3 mt-1">•</span>
@@ -108,7 +135,7 @@ export function DataSection() {
                     <span>Chênh lệch phát triển vùng miền, FDI tập trung vào các đô thị lớn</span>
                   </li>
                 </ul>
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </motion.div>

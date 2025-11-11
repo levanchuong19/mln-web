@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { ContentCard } from "../content-card"
+import { ChartDownIcon, RefreshIcon, GlobeIcon, ComputerIcon, BrainIcon } from "../icons"
 
 export function UnderstandingSection() {
   const periods = [
@@ -9,25 +10,25 @@ export function UnderstandingSection() {
       title: "Bối Cảnh Khủng Hoảng (Trước 1986)",
       content:
         'Nền kinh tế kế hoạch hóa tập trung bộc lộ sự lạc hậu. GDP bình quân đầu người chỉ đạt ~100 USD. Các phong trào "phá rào" tự phát phản ánh đòi hỏi thay đổi không thể đảo ngược.',
-      icon: "📉",
+      icon: ChartDownIcon,
     },
     {
       title: "Bước Ngoặt Đổi Mới (1986)",
       content:
         'Đại hội Đảng VI khởi xướng công cuộc Đổi Mới. Quyết định thực dụng thừa nhận kinh tế thị trường và kinh tế nhiều thành phần. Ưu tiên "điều gì sẽ hoạt động tốt nhất".',
-      icon: "🔄",
+      icon: RefreshIcon,
     },
     {
       title: "Giai Đoạn Hội Nhập (1995-2020)",
       content:
         "Hội nhập quốc tế thúc đẩy mạnh mẽ phát triển. FDI và xuất khẩu trở thành hai trụ cột tăng trưởng. Việt Nam chuyển mình từ nước nghèo nhất thành thu nhập trung bình thấp.",
-      icon: "🌐",
+      icon: GlobeIcon,
     },
     {
       title: "Chuyển Đổi Số (2020-Nay)",
       content:
         "Tập trung vào chuyển đổi số và đổi mới sáng tạo. Chuyển dịch từ trung tâm sản xuất truyền thống sang hệ sinh thái công nghệ cao, AI, bán dẫn.",
-      icon: "💻",
+      icon: ComputerIcon,
     },
   ]
 
@@ -75,13 +76,23 @@ export function UnderstandingSection() {
 
         {/* Philosophy section */}
         <motion.div
-          className="mt-16 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-8 md:p-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          className="mt-16 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-8 md:p-12 backdrop-blur-sm bg-[var(--color-surface)]/80"
+          initial={{ opacity: 0, y: 20, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
           viewport={{ once: true }}
+          whileHover={{ borderColor: "var(--color-accent)", scale: 1.01 }}
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-8">🧠 Bản Chất Triết Học</h3>
+          <motion.h3 
+            className="text-2xl md:text-3xl font-bold text-[var(--color-text)] mb-8 flex items-center gap-3"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <BrainIcon size={32} />
+            Bản Chất Triết Học
+          </motion.h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div>
               <h4 className="text-xl font-semibold text-[var(--color-accent)] mb-4">

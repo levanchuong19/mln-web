@@ -37,12 +37,17 @@ export function Navbar() {
     <motion.nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[var(--color-primary)]/80 backdrop-blur-md border-b border-[var(--color-border)]"
+          ? "bg-[var(--color-primary)]/80 backdrop-blur-md border-b border-[var(--color-border)] glass"
           : "bg-transparent"
       }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ 
+        duration: 0.6,
+        type: "spring",
+        stiffness: 100,
+        damping: 20
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="flex items-center justify-between">
@@ -59,11 +64,16 @@ export function Navbar() {
               <motion.a
                 key={item.label}
                 onClick={() => handleNavClick(item.href)}
-                className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors cursor-pointer"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.1 * index, duration: 0.6 }}
-                whileHover={{ scale: 1.1 }}
+                className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors cursor-pointer underline-animated relative"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  delay: 0.1 * index, 
+                  duration: 0.6,
+                  type: "spring",
+                  stiffness: 200
+                }}
+                whileHover={{ scale: 1.1, y: -2 }}
               >
                 {item.label}
               </motion.a>
@@ -82,24 +92,41 @@ export function Navbar() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="md:hidden overflow-hidden"
+              initial={{ opacity: 0, height: 0, y: -20 }}
+              animate={{ opacity: 1, height: "auto", y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -20 }}
+              transition={{ 
+                duration: 0.3,
+                type: "spring",
+                stiffness: 300,
+                damping: 30
+              }}
+              className="md:hidden overflow-hidden glass-light rounded-lg mt-2"
             >
-              <div className="py-4 space-y-3 border-t border-[var(--color-border)]">
-                {navItems.map((item) => (
+              <motion.div 
+                className="py-4 space-y-3 border-t border-[var(--color-border)]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                {navItems.map((item, index) => (
                   <motion.a
                     key={item.label}
                     onClick={() => handleNavClick(item.href)}
                     className="block px-4 py-2 text-[var(--color-text-muted)] hover:text-[var(--color-accent)] hover:bg-[var(--color-surface)]/50 rounded-lg transition-colors cursor-pointer"
-                    whileHover={{ x: 5 }}
+                    whileHover={{ x: 8, scale: 1.02 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ 
+                      delay: 0.1 + index * 0.05,
+                      type: "spring",
+                      stiffness: 200
+                    }}
                   >
                     {item.label}
                   </motion.a>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>

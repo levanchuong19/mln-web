@@ -2,6 +2,7 @@
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
 import { motion } from "framer-motion"
+import { ChartUpIcon } from "../icons"
 
 export function GDPChart() {
   const data = [
@@ -24,7 +25,16 @@ export function GDPChart() {
       viewport={{ once: true }}
       whileHover={{ y: -5 }}
     >
-      <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6">📈 Hành Trình GDP Việt Nam (1986-2024)</h3>
+      <motion.h3 
+        className="text-2xl font-bold text-[var(--color-text)] mb-6 flex items-center gap-3"
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <ChartUpIcon size={28} />
+        Hành Trình GDP Việt Nam (1986-2024)
+      </motion.h3>
       <p className="text-[var(--color-text-muted)] mb-6">
         Từ ~12 tỷ USD (1986) lên 476.39 tỷ USD (2024) - tăng hơn 30 lần trong 38 năm. Đường dốc gần như thẳng đứng từ
         cuối những năm 1990 là minh chứng rõ ràng của tác động Đổi Mới.

@@ -32,11 +32,17 @@ export function HeroSection({
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" as const },
+      scale: 1,
+      transition: { 
+        duration: 0.8, 
+        type: "spring",
+        stiffness: 100,
+        damping: 15
+      },
     },
   };
 
@@ -49,8 +55,14 @@ export function HeroSection({
 
   return (
     <section className="min-h-screen flex items-center justify-center pt-20 px-4 relative overflow-hidden">
-      {/* Video Background Container */}
-      <div className="absolute inset-0" style={{ zIndex: 0 }}>
+      {/* Parallax Background Container */}
+      <motion.div 
+        className="absolute inset-0" 
+        style={{ zIndex: 0 }}
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+      >
         {/* Fallback background - chỉ hiển thị khi không có video */}
         {!videoSrc && !youtubeVideoId && (
           <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg)] to-[var(--color-bg-secondary)]" />
@@ -117,7 +129,7 @@ export function HeroSection({
 
         {/* Overlay gradient nhẹ - điều chỉnh opacity để video hiển thị rõ */}
         {(videoSrc || (youtubeVideoId && mounted)) && (
-          <div
+          <motion.div
             className="absolute inset-0"
             style={{
               zIndex: 2,
@@ -125,9 +137,12 @@ export function HeroSection({
                 "linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.05) 50%, rgba(0,0,0,0.25) 100%)",
               pointerEvents: "none",
             }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
           />
         )}
-      </div>
+      </motion.div>
 
       <motion.div
         className="relative z-10 text-center max-w-4xl"
@@ -137,11 +152,28 @@ export function HeroSection({
       >
         <motion.div variants={itemVariants} className="mb-6">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-light)] to-[var(--color-warmth)] bg-clip-text text-transparent">
+            <motion.span 
+              className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-light)] to-[var(--color-warmth)] bg-clip-text text-transparent text-gradient-animated"
+              animate={{
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
               Kinh Tế Chính Trị
-            </span>
+            </motion.span>
             <br />
-            <span className="text-[var(--color-text)]">Mác - Lê Nin</span>
+            <motion.span 
+              className="text-[var(--color-text)]"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              Mác - Lê Nin
+            </motion.span>
           </h1>
         </motion.div>
 
@@ -158,16 +190,28 @@ export function HeroSection({
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <motion.button
-            className="px-8 py-3 bg-[var(--color-accent)] text-white rounded-lg font-semibold hover:bg-[var(--color-accent-light)] transition-all"
-            whileHover={{ scale: 1.05 }}
+            className="px-8 py-3 bg-[var(--color-accent)] text-white rounded-lg font-semibold hover:bg-[var(--color-accent-light)] transition-all relative overflow-hidden group"
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
           >
-            Bắt Đầu
+            <span className="relative z-10">Bắt Đầu</span>
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-[var(--color-accent-light)] to-[var(--color-accent)] opacity-0 group-hover:opacity-100"
+              initial={{ x: "-100%" }}
+              whileHover={{ x: "100%" }}
+              transition={{ duration: 0.5 }}
+            />
           </motion.button>
           <motion.button
-            className="px-8 py-3 border border-[var(--color-accent)] text-[var(--color-accent)] rounded-lg font-semibold hover:bg-[var(--color-accent)]/10 transition-all"
-            whileHover={{ scale: 1.05 }}
+            className="px-8 py-3 border border-[var(--color-accent)] text-[var(--color-accent)] rounded-lg font-semibold hover:bg-[var(--color-accent)]/10 transition-all underline-animated"
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, type: "spring", stiffness: 200 }}
           >
             Tìm Hiểu Thêm
           </motion.button>
@@ -184,12 +228,28 @@ export function HeroSection({
           ].map((stat, index) => (
             <motion.div
               key={index}
-              className="text-center"
-              whileHover={{ y: -5 }}
+              className="text-center glass-light rounded-lg p-4 backdrop-blur-sm"
+              whileHover={{ y: -8, scale: 1.05 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                delay: 0.8 + index * 0.1,
+                type: "spring",
+                stiffness: 200
+              }}
             >
-              <div className="text-2xl md:text-3xl font-bold text-[var(--color-accent)] mb-2">
+              <motion.div 
+                className="text-2xl md:text-3xl font-bold text-[var(--color-accent)] mb-2"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ 
+                  delay: 1 + index * 0.1,
+                  type: "spring",
+                  stiffness: 200
+                }}
+              >
                 {stat.value}
-              </div>
+              </motion.div>
               <div className="text-sm md:text-base text-[var(--color-text-dimmed)]">
                 {stat.label}
               </div>
