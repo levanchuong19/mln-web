@@ -15,7 +15,7 @@ export function UsersIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Users size={size} className="text-[var(--color-accent)]" />
+      <Users size={size} className="text-(--color-accent)" />
     </motion.div>
   )
 }

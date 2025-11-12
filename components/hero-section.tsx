@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useState, useEffect } from "react";
 
 interface HeroSectionProps {
@@ -20,7 +20,7 @@ export function HeroSection({
     setMounted(true);
   }, []);
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -31,7 +31,7 @@ export function HeroSection({
     },
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30, scale: 0.95 },
     visible: {
       opacity: 1,
@@ -65,7 +65,7 @@ export function HeroSection({
       >
         {/* Fallback background - chỉ hiển thị khi không có video */}
         {!videoSrc && !youtubeVideoId && (
-          <div className="absolute inset-0 bg-gradient-to-b from-[var(--color-bg)] to-[var(--color-bg-secondary)]" />
+          <div className="absolute inset-0 bg-linear-to-b from-(--color-bg) to-(--color-bg-secondary)" />
         )}
 
         {/* Local Video File Background - ưu tiên video local */}
@@ -153,7 +153,7 @@ export function HeroSection({
         <motion.div variants={itemVariants} className="mb-6">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <motion.span 
-              className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-light)] to-[var(--color-warmth)] bg-clip-text text-transparent text-gradient-animated"
+              className="bg-linear-to-r from-(--color-accent) via-(--color-accent-light) to-(--color-warmth) bg-clip-text text-transparent text-gradient-animated"
               animate={{
                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
               }}
@@ -167,7 +167,7 @@ export function HeroSection({
             </motion.span>
             <br />
             <motion.span 
-              className="text-[var(--color-text)]"
+              className="text-(--color-text)"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
@@ -179,7 +179,7 @@ export function HeroSection({
 
         <motion.p
           variants={itemVariants}
-          className="text-lg md:text-xl text-[var(--color-text-muted)] mb-8 leading-relaxed"
+          className="text-lg md:text-xl text-(--color-text-muted) mb-8 leading-relaxed"
         >
           Khám phá hành trình kinh tế Việt Nam từ khủng hoảng đến thịnh vượng,
           qua góc nhìn triết học Mác - Lê Nin
@@ -190,7 +190,7 @@ export function HeroSection({
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <motion.button
-            className="px-8 py-3 bg-[var(--color-accent)] text-white rounded-lg font-semibold hover:bg-[var(--color-accent-light)] transition-all relative overflow-hidden group"
+            className="px-8 py-3 bg-(--color-accent) text-white rounded-lg font-semibold hover:bg-(--color-accent-light) transition-all relative overflow-hidden group"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 20 }}
@@ -199,14 +199,14 @@ export function HeroSection({
           >
             <span className="relative z-10">Bắt Đầu</span>
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-[var(--color-accent-light)] to-[var(--color-accent)] opacity-0 group-hover:opacity-100"
+              className="absolute inset-0 bg-linear-to-r from-(--color-accent-light) to-(--color-accent) opacity-0 group-hover:opacity-100"
               initial={{ x: "-100%" }}
               whileHover={{ x: "100%" }}
               transition={{ duration: 0.5 }}
             />
           </motion.button>
           <motion.button
-            className="px-8 py-3 border border-[var(--color-accent)] text-[var(--color-accent)] rounded-lg font-semibold hover:bg-[var(--color-accent)]/10 transition-all underline-animated"
+            className="px-8 py-3 border border-(--color-accent) text-(--color-accent) rounded-lg font-semibold hover:bg-accent/10 transition-all underline-animated"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, y: 20 }}
@@ -239,7 +239,7 @@ export function HeroSection({
               }}
             >
               <motion.div 
-                className="text-2xl md:text-3xl font-bold text-[var(--color-accent)] mb-2"
+                className="text-2xl md:text-3xl font-bold text-(--color-accent) mb-2"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ 
@@ -250,7 +250,7 @@ export function HeroSection({
               >
                 {stat.value}
               </motion.div>
-              <div className="text-sm md:text-base text-[var(--color-text-dimmed)]">
+              <div className="text-sm md:text-base text-(--color-text-dimmed)">
                 {stat.label}
               </div>
             </motion.div>

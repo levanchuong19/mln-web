@@ -3,10 +3,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Kinh Tế Chính Trị - Mác Lê Nin",
+  title: "Kinh tế thị trường Việt Nam - Góc nhìn từ dữ liệu và thực tiễn",
   description:
     "Hành trình kinh tế Việt Nam qua góc nhìn triết học Mác-Lê Nin, từ khủng hoảng đến thịnh vượng",
-  generator: "v0.app",
 };
 
 export default function RootLayout({

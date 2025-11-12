@@ -15,7 +15,7 @@ export function BrainIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Brain size={size} className="text-[var(--color-accent)]" />
+      <Brain size={size} className="text-(--color-accent)" />
     </motion.div>
   )
 }

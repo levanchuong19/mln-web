@@ -15,7 +15,7 @@ export function StarIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1, rotate: 15 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Star size={size} className="text-[var(--color-warmth)] fill-[var(--color-warmth)]" />
+      <Star size={size} className="text-(--color-warmth) fill-(--color-warmth)" />
     </motion.div>
   )
 }

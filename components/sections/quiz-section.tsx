@@ -44,13 +44,6 @@ export function QuizSection() {
     setShowResults(true)
   }
 
-  const toggleExplanation = (questionId: string) => {
-    setShowExplanation((prev) => ({
-      ...prev,
-      [questionId]: !prev[questionId],
-    }))
-  }
-
   const calculateScore = () => {
     if (!selectedSet) return { correct: 0, total: 0, percentage: 0 }
     let correct = 0
@@ -95,11 +88,11 @@ export function QuizSection() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-warmth)] to-[var(--color-accent-light)] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-(--color-accent) via-(--color-warmth) to-(--color-accent-light) bg-clip-text text-transparent">
                 Câu Hỏi Trắc Nghiệm
               </span>
             </h2>
-            <p className="text-[var(--color-text-muted)] text-lg">
+            <p className="text-(--color-text-muted) text-lg">
               Kiểm tra kiến thức của bạn về Kinh Tế Chính Trị Mác-Lênin
             </p>
           </motion.div>
@@ -108,7 +101,7 @@ export function QuizSection() {
             {quizSets.map((set, index) => (
               <motion.div
                 key={set.id}
-                className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-6 hover:border-[var(--color-accent)] transition-all cursor-pointer group backdrop-blur-sm"
+                className="bg-(--color-surface) border border-(--color-border) rounded-xl p-6 hover:border-(--color-accent) transition-all cursor-pointer group backdrop-blur-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1, duration: 0.6 }}
@@ -116,17 +109,17 @@ export function QuizSection() {
                 whileHover={{ y: -5, scale: 1.02 }}
                 onClick={() => handleSelectSet(set)}
               >
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${getDifficultyColor(set.difficulty)} flex items-center justify-center mb-4`}>
+                <div className={`w-12 h-12 rounded-lg bg-linear-to-br ${getDifficultyColor(set.difficulty)} flex items-center justify-center mb-4`}>
                   <BookOpen className="text-white" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-[var(--color-text)] mb-2">{set.title}</h3>
-                <p className="text-sm text-[var(--color-text-muted)] mb-4">
-                  Mức độ: <span className="font-semibold text-[var(--color-accent)]">{set.difficulty}</span>
+                <h3 className="text-xl font-bold text-(--color-text) mb-2">{set.title}</h3>
+                <p className="text-sm text-(--color-text-muted) mb-4">
+                  Mức độ: <span className="font-semibold text-(--color-accent)">{set.difficulty}</span>
                 </p>
-                <p className="text-sm text-[var(--color-text-dimmed)] mb-4">
+                <p className="text-sm text-(--color-text-dimmed) mb-4">
                   {set.questions.length} câu hỏi
                 </p>
-                <div className="flex items-center text-[var(--color-accent)] group-hover:translate-x-2 transition-transform">
+                <div className="flex items-center text-(--color-accent) group-hover:translate-x-2 transition-transform">
                   <span className="text-sm font-semibold">Bắt đầu làm bài</span>
                   <ChevronRight size={16} className="ml-1" />
                 </div>
@@ -160,22 +153,22 @@ export function QuizSection() {
               setSelectedAnswers({})
               setShowResults(false)
             }}
-            className="text-[var(--color-accent)] hover:text-[var(--color-accent-light)] mb-4 flex items-center gap-2 mx-auto"
+            className="text-(--color-accent) hover:text-(--color-accent-light) mb-4 flex items-center gap-2 mx-auto"
           >
             <ChevronLeft size={20} />
             <span>Quay lại danh sách</span>
           </button>
           <h2 className="text-3xl md:text-4xl font-bold mb-2">{selectedSet.title}</h2>
-          <p className="text-[var(--color-text-muted)]">
+          <p className="text-(--color-text-muted)">
             Câu {currentQuestionIndex + 1} / {selectedSet.questions.length}
           </p>
         </motion.div>
 
         {/* Progress Bar */}
         <div className="mb-8">
-          <div className="h-2 bg-[var(--color-surface-light)] rounded-full overflow-hidden">
+          <div className="h-2 bg-(--color-surface-light) rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-warmth)]"
+              className="h-full bg-linear-to-r from-(--color-accent) to-(--color-warmth)"
               initial={{ width: 0 }}
               animate={{ width: `${((currentQuestionIndex + 1) / selectedSet.questions.length) * 100}%` }}
               transition={{ duration: 0.3 }}
@@ -187,13 +180,13 @@ export function QuizSection() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentQuestion.id}
-            className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-6 md:p-8 mb-6 backdrop-blur-sm"
+            className="bg-(--color-surface) border border-(--color-border) rounded-xl p-6 md:p-8 mb-6 backdrop-blur-sm"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.3 }}
           >
-            <h3 className="text-xl md:text-2xl font-bold text-[var(--color-text)] mb-6">
+            <h3 className="text-xl md:text-2xl font-bold text-(--color-text) mb-6">
               {currentQuestion.question}
             </h3>
 
@@ -214,8 +207,8 @@ export function QuizSection() {
                         : showIncorrect
                         ? "border-red-500 bg-red-500/10"
                         : isSelected
-                        ? "border-[var(--color-accent)] bg-[var(--color-accent)]/10"
-                        : "border-[var(--color-border)] hover:border-[var(--color-accent)]/50"
+                        ? "border-(--color-accent) bg-accent/10"
+                        : "border-(--color-border) hover:border-accent/50"
                     } ${showResults ? "cursor-default" : "cursor-pointer"}`}
                     whileHover={!showResults ? { scale: 1.02 } : {}}
                     whileTap={!showResults ? { scale: 0.98 } : {}}
@@ -228,8 +221,8 @@ export function QuizSection() {
                             : showIncorrect
                             ? "border-red-500 bg-red-500"
                             : isSelected
-                            ? "border-[var(--color-accent)] bg-[var(--color-accent)]"
-                            : "border-[var(--color-border)]"
+                            ? "border-(--color-accent) bg-(--color-accent)"
+                            : "border-(--color-border)"
                         }`}
                       >
                         {showCorrect && <CheckCircle2 size={16} className="text-white" />}
@@ -238,7 +231,7 @@ export function QuizSection() {
                           <div className="w-2 h-2 rounded-full bg-white" />
                         )}
                       </div>
-                      <span className="text-[var(--color-text)] flex-1">{option}</span>
+                      <span className="text-(--color-text) flex-1">{option}</span>
                     </div>
                   </motion.button>
                 )
@@ -250,10 +243,10 @@ export function QuizSection() {
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
-                className="mt-6 p-4 bg-[var(--color-surface-light)] border border-[var(--color-border)] rounded-lg"
+                className="mt-6 p-4 bg-(--color-surface-light) border border-(--color-border) rounded-lg"
               >
-                <p className="text-[var(--color-text-muted)] text-sm">
-                  <span className="font-semibold text-[var(--color-accent)]">Giải thích: </span>
+                <p className="text-(--color-text-muted) text-sm">
+                  <span className="font-semibold text-(--color-accent)">Giải thích: </span>
                   {currentQuestion.explanation}
                 </p>
               </motion.div>
@@ -266,7 +259,7 @@ export function QuizSection() {
           <motion.button
             onClick={handlePrevious}
             disabled={currentQuestionIndex === 0}
-            className="px-6 py-3 bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg text-[var(--color-text)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+            className="px-6 py-3 bg-(--color-surface) border border-(--color-border) rounded-lg text-(--color-text) disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -278,7 +271,7 @@ export function QuizSection() {
             <motion.button
               onClick={handleSubmit}
               disabled={!isAnswered || showResults}
-              className="px-6 py-3 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-warmth)] text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              className="px-6 py-3 bg-linear-to-r from-(--color-accent) to-(--color-warmth) text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -289,7 +282,7 @@ export function QuizSection() {
             <motion.button
               onClick={handleNext}
               disabled={!isAnswered}
-              className="px-6 py-3 bg-[var(--color-accent)] text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              className="px-6 py-3 bg-(--color-accent) text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -304,16 +297,16 @@ export function QuizSection() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="mt-8 bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-light)] border border-[var(--color-border)] rounded-xl p-8 text-center backdrop-blur-sm"
+            className="mt-8 bg-linear-to-br from-(--color-surface) to-(--color-surface-light) border border-(--color-border) rounded-xl p-8 text-center backdrop-blur-sm"
           >
-            <Trophy className="mx-auto mb-4 text-[var(--color-warmth)]" size={48} />
-            <h3 className="text-2xl font-bold text-[var(--color-text)] mb-4">Kết Quả</h3>
+            <Trophy className="mx-auto mb-4 text-(--color-warmth)" size={48} />
+            <h3 className="text-2xl font-bold text-(--color-text) mb-4">Kết Quả</h3>
             <div className="text-4xl font-bold mb-2">
-              <span className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-warmth)] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-(--color-accent) to-(--color-warmth) bg-clip-text text-transparent">
                 {score.percentage}%
               </span>
             </div>
-            <p className="text-[var(--color-text-muted)] mb-6">
+            <p className="text-(--color-text-muted) mb-6">
               Bạn đã trả lời đúng {score.correct} / {score.total} câu hỏi
             </p>
             <motion.button
@@ -323,7 +316,7 @@ export function QuizSection() {
                 setSelectedAnswers({})
                 setShowResults(false)
               }}
-              className="px-6 py-3 bg-[var(--color-accent)] text-white rounded-lg font-semibold hover:bg-[var(--color-accent-light)] transition-all"
+              className="px-6 py-3 bg-(--color-accent) text-white rounded-lg font-semibold hover:bg-(--color-accent-light) transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

@@ -15,7 +15,7 @@ export function BookIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Book size={size} className="text-[var(--color-accent)]" />
+      <Book size={size} className="text-(--color-accent)" />
     </motion.div>
   )
 }

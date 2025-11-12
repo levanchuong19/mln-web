@@ -15,7 +15,7 @@ export function CheckCircleIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <CheckCircle2 size={size} className="text-[var(--color-accent)]" />
+      <CheckCircle2 size={size} className="text-(--color-accent)" />
     </motion.div>
   )
 }

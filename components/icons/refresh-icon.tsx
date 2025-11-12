@@ -15,7 +15,7 @@ export function RefreshIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1, rotate: 180 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <RefreshCw size={size} className="text-[var(--color-accent)]" />
+      <RefreshCw size={size} className="text-(--color-accent)" />
     </motion.div>
   )
 }

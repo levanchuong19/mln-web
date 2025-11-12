@@ -9,10 +9,12 @@ import { FooterSection } from "@/components/footer-section";
 import { CentralQuestionSection } from "@/components/sections/central-question-section";
 import { YouthPerspectiveSection } from "@/components/sections/youth-perspective-section";
 import { QuizSection } from "@/components/sections/quiz-section";
+import GameSection from "@/components/sections/game-section";
+import Chatbot from "@/components/sections/chatbot";
 
 export default function Home() {
   return (
-    <main className="bg-gradient-to-b from-[var(--color-bg)] to-[var(--color-bg-secondary)]">
+    <main className="bg-linear-to-b from-(--color-bg) to-(--color-bg-secondary)">
       <Navbar />
       <div className="flex flex-col min-h-screen">
         <HeroSection youtubeVideoId="W1oxnaKv5Q4" />
@@ -22,8 +24,10 @@ export default function Home() {
         <CentralQuestionSection />
         <YouthPerspectiveSection />
         <QuizSection />
+        <GameSection />
         <FooterSection />
       </div>
+      <Chatbot />
     </main>
   );
 }

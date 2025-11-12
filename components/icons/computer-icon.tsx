@@ -15,7 +15,7 @@ export function ComputerIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <Monitor size={size} className="text-[var(--color-accent)]" />
+      <Monitor size={size} className="text-(--color-accent)" />
     </motion.div>
   )
 }

@@ -44,13 +44,13 @@ export function LaborChart() {
       viewport={{ once: true }}
     >
       <motion.div
-        className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-6 md:p-8"
+        className="bg-(--color-surface) border border-(--color-border) rounded-xl p-6 md:p-8"
         variants={itemVariants}
       >
-        <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6">
+        <h3 className="text-2xl font-bold text-(--color-text) mb-6">
           👥 Sự Chuyển Dịch Cơ Cấu Lao Động (2019-2024)
         </h3>
-        <p className="text-[var(--color-text-muted)] mb-8">
+        <p className="text-(--color-text-muted) mb-8">
           Chỉ trong 5 năm, tỷ trọng lao động Nông nghiệp giảm mạnh (34.7% → 26.5%), trong khi Công nghiệp và Dịch vụ
           tăng. Hàng triệu người di chuyển từ đồng ruộng vào các nhà máy và khu đô thị - đây là sự thay đổi về lực lượng
           sản xuất trong thực tiễn.

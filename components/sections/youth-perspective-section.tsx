@@ -1,14 +1,19 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Zap, Lightbulb, Users } from "lucide-react"
+import { useState } from "react"
+import { Zap, Lightbulb, Users, ChartLineIcon, Maximize, Paperclip } from "lucide-react"
 
 export function YouthPerspectiveSection() {
+  const [flipped, setFlipped] = useState<number | null>(null)
+
   const roles = [
     {
       icon: Users,
       title: "Người Tiêu Dùng (Consumer)",
-      description:
+      front:
+        " ",
+      back:
         "Một người thụ hưởng thành quả của hội nhập, sử dụng các sản phẩm công nghệ toàn cầu và dịch vụ đám mây, tham gia vào thị trường lao động do các FDI tạo ra.",
       color: "from-blue-500 to-cyan-400",
       accent: "text-blue-400",
@@ -16,7 +21,9 @@ export function YouthPerspectiveSection() {
     {
       icon: Lightbulb,
       title: "Người Sáng Tạo (Creator)",
-      description:
+      front:
+        "",
+      back:
         "Một người chủ động tham gia vào hệ sinh thái khởi nghiệp, sử dụng các công cụ (AI, Data) để tạo ra sản phẩm, dịch vụ và mô hình kinh doanh mới.",
       color: "from-amber-500 to-yellow-400",
       accent: "text-amber-400",
@@ -24,165 +31,122 @@ export function YouthPerspectiveSection() {
     {
       icon: Zap,
       title: "Người Kiến Tạo Tương Lai (Architect)",
-      description:
+      front:
+        "",
+      back:
         "Một người nhận lãnh vai trò 'xung kích', không chỉ tạo ra sản phẩm mà còn xây dựng nền tảng, đào tạo nhân lực và dẫn dắt chuyển đổi của Việt Nam.",
       color: "from-purple-500 to-pink-400",
       accent: "text-purple-400",
     },
-  ]
-
-  const keyPoints = [
     {
+      icon: ChartLineIcon,
       title: "Lực Lượng Tiên Phong",
-      description:
-        "Thế hệ trẻ là lực lượng nòng cốt trong kinh tế số, khởi nghiệp sáng tạo, AI – Data – Green Economy.",
+      front: "",
+      back:
+        "TThế hệ trẻ là lực lượng nòng cốt trong kinh tế số, khởi nghiệp sáng tạo, AI – Data – Green Economy.",
+      color: "from-emerald-500 to-green-400",
+      accent: "text-emerald-400",
     },
     {
+      icon: Maximize,
       title: "5 Lĩnh Vực Then Chốt",
-      items: [
-        "Nâng cao nhận thức số",
-        "Xây dựng thể chế số",
-        "Phát triển hạ tầng số",
-        "Đào tạo nguồn nhân lực số",
-        "Đổi mới sáng tạo & khởi nghiệp",
-      ],
+      front: "",
+      back:
+        "Nâng cao nhận thức số, Xây dựng thể chế số, Phát triển hạ tầng số, Phát triển hạ tầng số, Đổi mới sáng tạo & khởi nghiệp.",
+      color: "from-rose-500 to-pink-400",
+      accent: "text-rose-400",
     },
     {
+      icon: Paperclip,
       title: "Hệ Sinh Thái Hỗ Trợ",
-      description:
+      front:
+        "",
+      back:
         "Các quỹ vay, trung tâm hỗ trợ, và sự kết nối giữa viện, trường, doanh nghiệp đang được xây dựng và mở rộng.",
+      color: "from-indigo-500 to-blue-400",
+      accent: "text-indigo-400",
     },
   ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  }
 
   return (
-    <section id="goicnhinh" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-[var(--color-primary)]/5">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-balance">
-            <span className="bg-gradient-to-r from-[var(--color-accent)] via-amber-400 to-[var(--color-accent-light)] bg-clip-text text-transparent">
-              Góc Nhìn Giới Trẻ
-            </span>
-          </h2>
-          <p className="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
-            Thế hệ trẻ là lực lượng tiên phong trong kinh tế số, khởi nghiệp sáng tạo, AI – Data – Green Economy.
-          </p>
-        </motion.div>
-
-        {/* Central Question */}
-        <motion.div
-          className="bg-[var(--color-surface)]/70 border border-[var(--color-accent)]/30 rounded-lg p-8 mb-16 text-center"
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-2xl font-bold text-[var(--color-accent)] mb-3">Bạn là ai trong nền kinh tế mở?</p>
-          <p className="text-[var(--color-text-muted)]">
-            Bạn là người tiêu dùng, người sáng tạo hay người kiến tạo tương lai?
-          </p>
-        </motion.div>
-
-        {/* Three Roles */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {roles.map((role, index) => {
-            const Icon = role.icon
-            return (
-              <motion.div
-                key={role.title}
-                variants={itemVariants}
-                className="group relative bg-[var(--color-surface)] border border-[var(--color-border)] rounded-lg p-8 hover:border-[var(--color-accent)] transition-all duration-300 overflow-hidden"
-                whileHover={{ y: -8 }}
-              >
-                {/* Background gradient */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${role.color} opacity-5 group-hover:opacity-10 transition-opacity`}
-                />
-
-                {/* Content */}
-                <div className="relative z-10">
-                  <Icon className={`${role.accent} mb-4`} size={40} />
-                  <h3 className="text-xl font-bold text-[var(--color-text)] mb-3">{role.title}</h3>
-                  <p className="text-[var(--color-text-muted)] text-sm leading-relaxed">{role.description}</p>
-                </div>
-              </motion.div>
-            )
-          })}
-        </motion.div>
-
-        {/* Key Points */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {keyPoints.map((point, index) => (
-            <motion.div
-              key={point.title}
-              variants={itemVariants}
-              className="bg-gradient-to-br from-[var(--color-primary)]/10 to-[var(--color-accent)]/10 border border-[var(--color-border)] rounded-lg p-8"
-              whileHover={{ scale: 1.02 }}
-            >
-              <h4 className="text-lg font-bold text-[var(--color-accent)] mb-4">{point.title}</h4>
-              {point.items ? (
-                <ul className="space-y-3">
-                  {point.items.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <span className="text-[var(--color-accent)] font-bold mt-1">✓</span>
-                      <span className="text-[var(--color-text-muted)] text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-[var(--color-text-muted)] text-sm">{point.description}</p>
-              )}
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Call to Action */}
-        <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <p className="text-lg text-[var(--color-text)] font-semibold mb-4">
-            Hành động bây giờ để trở thành lực lượng dẫn dắt sự thay đổi của Việt Nam.
-          </p>
-          <div className="inline-block px-8 py-3 bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-accent-light)] rounded-lg text-[var(--color-bg)] font-bold hover:shadow-lg transition-shadow">
-            Khám Phá Hệ Sinh Thái
-          </div>
-        </motion.div>
+    <section id="gocnhin" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-primary/5">
+      <div className="max-w-3xl mx-auto text-center mb-16">
+        <h2 className="text-3xl md:text-5xl font-bold mb-6">
+          <span className="bg-linear-to-r from-(--color-accent) via-amber-400 to-(--color-accent-light) bg-clip-text text-transparent">
+            Góc Nhìn Giới Trẻ
+          </span>
+        </h2>
+        <p className="text-lg text-(--color-text-muted) max-w-2xl mx-auto">
+          Thế hệ trẻ là lực lượng tiên phong trong kinh tế số, khởi nghiệp sáng tạo.
+        </p>
       </div>
+
+      <div className="max-w-5xl mx-auto grid grid-cols-[repeat(auto-fit,minmax(240px,300px))] justify-center gap-4 perspective-distant">
+  {roles.map((role, i) => {
+    const Icon = role.icon
+    const isFlipped = flipped === i
+    return (
+      <motion.div
+        key={i}
+        className="relative h-[280px] w-full max-w-[300px] cursor-pointer select-none"
+        onClick={() => setFlipped(isFlipped ? null : i)}
+        initial={false}
+        whileHover={{ y: -6 }}
+        transition={{ type: "spring", stiffness: 120, damping: 15 }}
+      >
+        <motion.div
+          className="absolute inset-0 transform-3d"
+          animate={{ rotateY: isFlipped ? 180 : 0 }}
+          transition={{ duration: 0.8, ease: [0.4, 0.1, 0.2, 1] }}
+        >
+          {/* FRONT */}
+          <motion.div
+            className="absolute inset-0 backface-hidden bg-(--color-surface) border border-(--color-border) rounded-xl p-6 flex flex-col items-center justify-center text-center hover:border-(--color-accent) shadow-sm transition-all duration-300"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: isFlipped ? 0 : 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            <div className="flex flex-col items-center mb-3">
+              <Icon className={`${role.accent} mb-2`} size={36} />
+              <h3 className="text-base font-semibold text-(--color-text)">
+                {role.title}
+              </h3>
+            </div>
+            <p className="text-(--color-text-muted) text-sm leading-relaxed px-3">
+              {role.front}
+            </p>
+          </motion.div>
+
+          {/* BACK */}
+          <motion.div
+            className="absolute inset-0 backface-hidden rotate-y-180 bg-linear-to-br from-(--color-surface) to-(--color-surface-light) border border-(--color-border) rounded-xl p-6 flex flex-col justify-center items-center text-center shadow-md"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isFlipped ? 1 : 0 }}
+            transition={{ duration: 0.4, delay: isFlipped ? 0.2 : 0 }}
+          >
+            <motion.p
+              className="text-(--color-text-muted) text-sm mb-3 px-3"
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              {role.back}
+            </motion.p>
+            <motion.span
+              className={`text-xs font-semibold ${role.accent}`}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              (Click để lật lại)
+            </motion.span>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    )
+  })}
+      </div>
+
     </section>
   )
 }

@@ -32,11 +32,11 @@ export function DataSection() {
           viewport={{ once: true }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-warmth)] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-(--color-accent) to-(--color-warmth) bg-clip-text text-transparent">
               Phần 3: Dữ Liệu & Biểu Đồ
             </span>
           </h2>
-          <p className="text-[var(--color-text-muted)] text-lg">
+          <p className="text-(--color-text-muted) text-lg">
             Minh chứng thực tế về hành trình phát triển kinh tế Việt Nam
           </p>
         </motion.div>
@@ -70,13 +70,13 @@ export function DataSection() {
 
           {/* Summary Stats */}
           <motion.div
-            className="bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-light)] border border-[var(--color-border)] rounded-xl p-8 md:p-12 backdrop-blur-sm"
+            className="bg-linear-to-br from-(--color-surface) to-(--color-surface-light) border border-(--color-border) rounded-xl p-8 md:p-12 backdrop-blur-sm"
             variants={itemVariants}
             whileHover={{ borderColor: "var(--color-accent)", scale: 1.01 }}
             transition={{ type: "spring", stiffness: 100 }}
           >
             <motion.h3 
-              className="text-2xl font-bold text-[var(--color-text)] mb-8 flex items-center gap-3"
+              className="text-2xl font-bold text-(--color-text) mb-8 flex items-center gap-3"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -92,21 +92,21 @@ export function DataSection() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h4 className="text-lg font-semibold text-[var(--color-accent)] mb-4 flex items-center gap-2">
+                <h4 className="text-lg font-semibold text-(--color-accent) mb-4 flex items-center gap-2">
                   <CheckCircleIcon size={20} />
                   Thành Tựu
                 </h4>
-                <ul className="space-y-3 text-[var(--color-text-muted)]">
+                <ul className="space-y-3 text-(--color-text-muted)">
                   <li className="flex items-start">
-                    <span className="text-[var(--color-accent)] mr-3 mt-1">•</span>
+                    <span className="text-(--color-accent) mr-3 mt-1">•</span>
                     <span>Chuyển từ nước nghèo nhất thành thu nhập trung bình thấp trong 1 thế hệ</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-[var(--color-accent)] mr-3 mt-1">•</span>
+                    <span className="text-(--color-accent) mr-3 mt-1">•</span>
                     <span>Tiếp cận điện tăng từ 14% (1993) lên gần 100% (2019)</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-[var(--color-accent)] mr-3 mt-1">•</span>
+                    <span className="text-(--color-accent) mr-3 mt-1">•</span>
                     <span>Chỉ số vốn nhân lực cao nhất trong nhóm nước thu nhập trung bình thấp</span>
                   </li>
                 </ul>
@@ -117,21 +117,21 @@ export function DataSection() {
                 transition={{ duration: 0.6, delay: 0.3 }}
                 viewport={{ once: true }}
               >
-                <h4 className="text-lg font-semibold text-[var(--color-warmth)] mb-4 flex items-center gap-2">
+                <h4 className="text-lg font-semibold text-(--color-warmth) mb-4 flex items-center gap-2">
                   <WarningIcon size={20} />
                   Hạn Chế
                 </h4>
-                <ul className="space-y-3 text-[var(--color-text-muted)]">
+                <ul className="space-y-3 text-(--color-text-muted)">
                   <li className="flex items-start">
-                    <span className="text-[var(--color-warmth)] mr-3 mt-1">•</span>
+                    <span className="text-(--color-warmth) mr-3 mt-1">•</span>
                     <span>Phụ thuộc vào dịch vụ đám mây nước ngoài, rủi ro an ninh mạng</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-[var(--color-warmth)] mr-3 mt-1">•</span>
+                    <span className="text-(--color-warmth) mr-3 mt-1">•</span>
                     <span>Nền kinh tế phụ thuộc lớn vào các doanh nghiệp FDI công nghệ cao</span>
                   </li>
                   <li className="flex items-start">
-                    <span className="text-[var(--color-warmth)] mr-3 mt-1">•</span>
+                    <span className="text-(--color-warmth) mr-3 mt-1">•</span>
                     <span>Chênh lệch phát triển vùng miền, FDI tập trung vào các đô thị lớn</span>
                   </li>
                 </ul>
