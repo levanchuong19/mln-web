@@ -17,15 +17,15 @@ export function FDIChart() {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-light)] border border-[var(--color-border)] rounded-xl p-6 md:p-8 hover:border-[var(--color-accent-glow)] transition-all"
+      className="bg-linear-to-br from-(--color-surface) to-(--color-surface-light) border border-(--color-border) rounded-xl p-6 md:p-8 hover:border-(--color-accent-glow) transition-all"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
       whileHover={{ y: -5, borderColor: "var(--color-accent-glow)" }}
     >
-      <h3 className="text-2xl font-bold text-[var(--color-text)] mb-6">💼 Đầu Tư Trực Tiếp Nước Ngoài (FDI)</h3>
-      <p className="text-[var(--color-text-muted)] mb-8">
+      <h3 className="text-2xl font-bold text-(--color-text) mb-6">💼 Đầu Tư Trực Tiếp Nước Ngoài (FDI)</h3>
+      <p className="text-(--color-text-muted) mb-8">
         Vốn FDI giải ngân liên tục tăng - 23.18 tỷ USD (2023) lên 25.35 tỷ USD (2024). FDI là động cơ chính thúc đẩy
         tăng trưởng, công nghiệp hóa và xuất khẩu của Việt Nam.
       </p>
@@ -50,7 +50,10 @@ export function FDIChart() {
                   borderRadius: "8px",
                   color: "var(--color-text)",
                 }}
-                formatter={(value) => `${value.toFixed(2)} tỷ USD`}
+                formatter={(value) => {
+                  const num = typeof value === "number" ? value : (typeof value === "string" ? parseFloat(value) : NaN);
+                  return Number.isFinite(num) ? `${num.toFixed(2)} tỷ USD` : "";
+                }}
               />
               <Area
                 type="monotone"
@@ -65,20 +68,20 @@ export function FDIChart() {
         </div>
 
         <div>
-          <h4 className="font-semibold text-[var(--color-accent)] mb-4">Nhà đầu tư hàng đầu</h4>
+          <h4 className="font-semibold text-(--color-accent) mb-4">Nhà đầu tư hàng đầu</h4>
           <div className="space-y-3">
             {highlights.map((company, index) => (
               <motion.div
                 key={index}
-                className="bg-[var(--color-surface)] p-3 rounded-lg border border-[var(--color-border)]"
+                className="bg-(--color-surface) p-3 rounded-lg border border-(--color-border)"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.15, duration: 0.6 }}
                 viewport={{ once: true }}
                 whileHover={{ x: 5 }}
               >
-                <p className="font-semibold text-[var(--color-text)]">{company.title}</p>
-                <p className="text-sm text-[var(--color-text-dimmed)]">{company.industry}</p>
+                <p className="font-semibold text-(--color-text)">{company.title}</p>
+                <p className="text-sm text-(--color-text-dimmed)">{company.industry}</p>
               </motion.div>
             ))}
           </div>

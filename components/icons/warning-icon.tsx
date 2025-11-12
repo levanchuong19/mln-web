@@ -15,7 +15,7 @@ export function WarningIcon({ className = "", size = 24 }: IconProps) {
       whileHover={{ scale: 1.1 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <AlertTriangle size={size} className="text-[var(--color-warmth)]" />
+      <AlertTriangle size={size} className="text-(--color-warmth)" />
     </motion.div>
   )
 }
