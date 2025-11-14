@@ -77,11 +77,11 @@ export default function GameBoard({
         </div>
         <div className="p-4 rounded-lg bg-surface/80 backdrop-blur-md shadow-md border border-border">
           <p className="text-sm text-(--color-text)">Quyết Định</p>
-          <p className="text-2xl font-bold text-accent">{gameState.decision_count}/38</p>
+          <p className="text-2xl font-bold text-accent">{gameState.decision_count}/25</p>
         </div>
         <div className="p-4 rounded-lg bg-surface/80 backdrop-blur-md shadow-md border border-border">
           <p className="text-sm text-(--color-text)">Tiến Độ</p>
-          <p className="text-2xl font-bold text-accent">{Math.round((gameState.decision_count / 38) * 100)}%</p>
+          <p className="text-2xl font-bold text-accent">{Math.round((gameState.decision_count / 25) * 100)}%</p>
         </div>
         <div className="p-4 rounded-lg bg-surface/80 backdrop-blur-md shadow-md border border-border">
           <p className="text-sm text-(--color-text)">Trạng Thái</p>

@@ -19,7 +19,7 @@ export interface GameState {
 
 export default function GameContainer({ onClose }: { onClose: () => void }) {
   const [gameState, setGameState] = useState<GameState>({
-    year: 1986,
+    year: 2000,   // ⭐ Bắt đầu từ năm 2000
     gdp: 100,
     population: 60,
     resources: 50,
@@ -83,16 +83,20 @@ export default function GameContainer({ onClose }: { onClose: () => void }) {
     newState.year += 1
     newState.decision_count += 1
 
-    // Clamp values between 0 and 100
+    // Clamp 0–100
     Object.keys(newState).forEach((key) => {
       if (key !== "year" && key !== "decision_count") {
-        newState[key as keyof typeof newState] = Math.max(0, Math.min(100, newState[key as keyof typeof newState]))
+        newState[key as keyof typeof newState] = Math.max(
+          0,
+          Math.min(100, newState[key as keyof typeof newState])
+        )
       }
     })
 
     setGameState(newState)
 
-    if (newState.year >= 2024) {
+    // ⭐ Kết thúc khi vượt quá năm 2024 → dừng tại năm 2025
+    if (newState.year > 2024) {
       calculateScore(newState)
       setGameOver(true)
     }
