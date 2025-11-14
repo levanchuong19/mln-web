@@ -1,40 +1,75 @@
-"use client"
+"use client";
 
-import { useChat } from "@ai-sdk/react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Send, Bot, User, Loader2, X } from "lucide-react"
-import { useState, useRef, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion";
+import { Send, Bot, User, Loader2, X } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
 
 export default function Chatbot() {
-  const { messages, sendMessage, status } = useChat()
-  const [open, setOpen] = useState(false)
-  const [inputValue, setInputValue] = useState("")
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [open, setOpen] = useState(false);
+  const [messages, setMessages] = useState<any[]>([]);
+  const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const isLoading = status === "submitted" || status === "streaming"
+  // --- GỢI Ý CÂU HỎI MẪU ---
+  const sampleQuestions = [
+    "Kinh tế thị trường định hướng XHCN là gì?",
+    "GDP được tính như thế nào?",
+    "Vai trò của quy luật giá trị trong kinh tế?",
+    "Hàng hóa là gì trong kinh tế Mác?",
+  ];
+
+  const sendQuestion = async (question: string) => {
+    const userMsg = { id: Date.now(), role: "user", text: question };
+    setMessages((prev) => [...prev, userMsg]);
+    setIsLoading(true);
+
+    try {
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question }),
+      });
+
+      const data = await res.json();
+
+      const assistantMsg = {
+        id: Date.now() + 1,
+        role: "assistant",
+        text: data.answer,
+      };
+
+      setMessages((prev) => [...prev, assistantMsg]);
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        { id: Date.now() + 2, role: "assistant", text: "Lỗi kết nối server." },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!inputValue.trim()) return
+    e.preventDefault();
+    if (!inputValue.trim()) return;
 
-    await sendMessage({ text: inputValue })
-    setInputValue("")
-  }
+    await sendQuestion(inputValue);
+    setInputValue("");
+  };
 
   useEffect(() => {
     if (open) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
-  }, [messages, open])
+  }, [messages, open]);
 
   return (
     <>
-      {/* Floating Button - icon Bot */}
+      {/* Floating Button */}
       <motion.button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl 
-                   bg-gray-900/90 text-white border border-gray-700 
-                   hover:bg-gray-800 transition-all z-50"
+        className="fixed bottom-6 right-6 p-4 rounded-full shadow-xl bg-gray-900/90 text-white border border-gray-700 hover:bg-gray-800 transition-all z-50"
         whileHover={{ scale: 1.12 }}
         whileTap={{ scale: 0.95 }}
       >
@@ -50,23 +85,22 @@ export default function Chatbot() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            {/* Chat Box */}
             <motion.div
-              className="bg-[#0f0f10]/90 backdrop-blur-xl border border-gray-800 
-                         rounded-3xl w-[95%] max-w-lg h-[75vh] flex flex-col shadow-2xl"
+              className="bg-[#0f0f10]/90 backdrop-blur-xl border border-gray-800 rounded-3xl w-[95%] max-w-lg h-[75vh] flex flex-col shadow-2xl"
               initial={{ scale: 0.9, opacity: 0, y: 40 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 40 }}
               transition={{ type: "spring", stiffness: 120, damping: 15 }}
             >
               {/* Header */}
-              <div className="flex justify-between items-center px-5 py-4 
-                              border-b border-gray-800 bg-black/40 backdrop-blur-md">
+              <div className="flex justify-between items-center px-5 py-4 border-b border-gray-800 bg-black/40 backdrop-blur-md">
                 <div className="flex items-center gap-3">
                   <div className="p-2 rounded-full bg-blue-500 text-white shadow">
                     <Bot size={20} />
                   </div>
-                  <h2 className="font-semibold text-lg text-white">AI Chatbot - Thành viên ảo của nhóm 3</h2>
+                  <h2 className="font-semibold text-lg text-white">
+                    AI Chatbot - Thành viên ảo của nhóm 3
+                  </h2>
                 </div>
 
                 <button
@@ -86,6 +120,19 @@ export default function Chatbot() {
                     <p className="text-sm text-gray-500">
                       Tôi có thể giải thích kinh tế Mác–Lênin, thị trường, GDP...
                     </p>
+
+                    {/* Gợi ý câu hỏi */}
+                    <div className="mt-6 space-y-2">
+                      {sampleQuestions.map((q, i) => (
+                        <button
+                          key={i}
+                          onClick={() => sendQuestion(q)}
+                          className="block w-full text-left px-4 py-2 bg-gray-800 border border-gray-700 text-gray-200 rounded-xl hover:bg-gray-700 transition text-sm"
+                        >
+                          {q}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 )}
 
@@ -95,7 +142,9 @@ export default function Chatbot() {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     className={`flex items-end gap-2 ${
-                      msg.role === "user" ? "justify-end" : "justify-start"
+                      msg.role === "user"
+                        ? "justify-end"
+                        : "justify-start"
                     }`}
                   >
                     {msg.role === "assistant" && (
@@ -110,7 +159,7 @@ export default function Chatbot() {
                           : "bg-gray-800 text-gray-100 border border-gray-700 rounded-bl-none"
                       }`}
                     >
-                      {msg.parts?.map((p: any) => ("text" in p ? p.text : "")).join(" ")}
+                      {msg.text}
                     </div>
 
                     {msg.role === "user" && (
@@ -121,7 +170,7 @@ export default function Chatbot() {
 
                 {isLoading && (
                   <div className="flex items-center gap-2 text-blue-400 text-sm">
-                    <Loader2 className="animate-spin" size={16} /> Đang suy nghĩ...
+                    <Loader2 className="animate-spin" size={16} />🤖 Cho tôi suy nghĩ tí nhé ...
                   </div>
                 )}
 
@@ -137,17 +186,14 @@ export default function Chatbot() {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   placeholder="Nhập câu hỏi..."
-                  className="flex-1 px-3 py-2 bg-gray-900 text-gray-200 
-                             border border-gray-700 rounded-xl 
-                             placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm"
+                  className="flex-1 px-3 py-2 bg-gray-900 text-gray-200 border border-gray-700 rounded-xl placeholder-gray-500 focus:outline-none focus:border-blue-500 text-sm"
                   disabled={isLoading}
                 />
 
                 <motion.button
                   type="submit"
                   disabled={isLoading || !inputValue.trim()}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-xl shadow 
-                             hover:bg-blue-700 transition disabled:opacity-50"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition disabled:opacity-50"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -163,5 +209,5 @@ export default function Chatbot() {
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
