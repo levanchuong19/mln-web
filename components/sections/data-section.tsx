@@ -22,8 +22,20 @@ export function DataSection() {
   }
 
   return (
-    <section id="dulieu" className="py-20 px-4 relative">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="dulieu"
+      className="py-20 px-4 relative overflow-hidden"
+    >
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat blur-lg scale-110"
+        style={{ backgroundImage: "url('/bg.jpg')" }}
+      />
+
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/60" />
+
+      <div className="relative max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
@@ -70,7 +82,7 @@ export function DataSection() {
 
           {/* Summary Stats */}
           <motion.div
-            className="bg-linear-to-br from-(--color-surface) to-(--color-surface-light) border border-(--color-border) rounded-xl p-8 md:p-12 backdrop-blur-sm"
+            className="bg-linear-to-br from-(--color-surface) to-(--color-surface-light) border border-(--color-border) rounded-xl p-8 md:p-12 backdrop-blur-sm relative z-10"
             variants={itemVariants}
             whileHover={{ borderColor: "var(--color-accent)", scale: 1.01 }}
             transition={{ type: "spring", stiffness: 100 }}
@@ -85,7 +97,9 @@ export function DataSection() {
               <BarChartIcon size={28} />
               Thành Tựu & Hạn Chế
             </motion.h3>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Thành tựu */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -111,6 +125,8 @@ export function DataSection() {
                   </li>
                 </ul>
               </motion.div>
+
+              {/* Hạn chế */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}

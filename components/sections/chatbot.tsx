@@ -2,7 +2,7 @@
 
 import { useChat } from "@ai-sdk/react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Send, Bot, User, Loader2, MessageCircle } from "lucide-react"
+import { Send, Bot, User, Loader2, BotIcon } from "lucide-react"
 import { useState, useRef, useEffect } from "react"
 
 export default function Chatbot() {
@@ -22,7 +22,6 @@ export default function Chatbot() {
     }
   }, [messages, open])
 
-  // ✅ Gửi tin nhắn bằng sendMessage
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!inputValue.trim()) return
@@ -32,17 +31,15 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* 🌟 Floating Button */}
       <motion.button
         onClick={() => setOpen(true)}
         className="fixed bottom-6 right-6 bg-(--color-accent) text-white p-4 rounded-full shadow-lg hover:bg-(--color-accent-light) transition-all z-50 flex items-center justify-center"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >
-        <MessageCircle size={26} />
+        <BotIcon size={26} />
       </motion.button>
 
-      {/* 🌙 Chat Popup */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -72,7 +69,6 @@ export default function Chatbot() {
                 </button>
               </div>
 
-              {/* Messages */}
               <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-(--color-surface)">
                 {messages.length === 0 && (
                   <div className="text-center text-(--color-text-muted) py-12">
